@@ -4,7 +4,10 @@ import { transparency } from "@/lib/content";
 // Section: Radical transparency (was the "Proof"/testimonials slot).
 export function Proof() {
   return (
-    <section id="transparency" className="border-t border-border bg-forest py-24 text-paper md:py-32">
+    <section
+      id="transparency"
+      className="border-t border-border bg-forest py-24 text-paper md:py-32"
+    >
       <Container>
         <div className="max-w-3xl">
           <span className="eyebrow text-honey">{transparency.eyebrow}</span>

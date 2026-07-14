@@ -35,7 +35,11 @@ export function InquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-5">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      className="flex flex-col gap-5"
+    >
       <Field label="Name" htmlFor="name" error={errors.name?.message}>
         <input
           id="name"
@@ -75,9 +79,19 @@ export function InquiryForm() {
       </Field>
 
       {/* Honeypot — visually hidden. */}
-      <div aria-hidden className="absolute -left-[9999px]" style={{ position: "absolute" }}>
+      <div
+        aria-hidden
+        className="absolute -left-[9999px]"
+        style={{ position: "absolute" }}
+      >
         <label htmlFor="company">Company (leave blank)</label>
-        <input id="company" type="text" tabIndex={-1} autoComplete="off" {...register("company")} />
+        <input
+          id="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("company")}
+        />
       </div>
 
       {status === "error" && (
