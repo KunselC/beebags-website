@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/*
+  BeeBags design tokens — sourced from the brand book.
+  Palette ratio: neutrals ~60%, greens ~30%, honey ~10% (single accent per screen).
+  Honey is NEVER body text or a background. Paper is the default bg (never pure white).
+*/
+
+:root {
+  /* Brand palette (exact hex from brand book) */
+  --forest: #2d441b; /* primary — headlines, wordmark, some body */
+  --honey: #ffc259; /* signature accent only — rules, single CTA */
+  --meadow: #52796f; /* secondary — eyebrows, subheads */
+  --kraft: #e6dcc8; /* warm neutral — callouts, section fills */
+  --charcoal: #1c1c1a; /* body text on light */
+  --slate: #6b7280; /* metadata, disclaimers */
+  --paper: #fafaf7; /* default background — never pure white */
+
+  /* Semantic */
+  --background: var(--paper);
+  --foreground: var(--charcoal);
+  --heading: var(--forest);
+  --border: #e2ddce;
+
+  /* Motion tuning — quiet, no overshoot (brand is calm, not springy) */
+  --ease-quiet: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Map tokens into Tailwind v4 theme → utilities: bg-paper, text-forest, etc. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+
+  --color-forest: var(--forest);
+  --color-honey: var(--honey);
+  --color-meadow: var(--meadow);
+  --color-kraft: var(--kraft);
+  --color-charcoal: var(--charcoal);
+  --color-slate: var(--slate);
+  --color-paper: var(--paper);
+
+  --font-display: var(--font-display), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+
+  --ease-quiet: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ---- Brand typographic helpers ---- */
+
+/* Display face: condensed, ALL CAPS, tracked — headlines & large numerals only. */
+.display {
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 0.98;
+  color: var(--heading);
+}
+
+/* Eyebrow: Meadow, small, tracked, sits above a heading. */
+.eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--meadow);
+}
+
+/* The one sanctioned flourish: a 2pt Honey hairline rule under section headings. */
+.hairline {
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  background: var(--honey);
+  border: 0;
+}
+
+/* Pull quote: Source Serif 4 italic — at most once per page. */
+.pullquote {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  color: var(--forest);
+}
+
+/* Scroll-reveal elements: initial hidden state applied by GSAP in a pre-paint
+   layout effect (see reveal hook), NOT in CSS — keeps no-JS users seeing all
+   content and avoids SSR/client hydration mismatch. */
+.reveal {
+  will-change: transform, opacity;
+}
+
+/* ---- Accessibility: honor reduced motion globally ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--forest);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--honey);
+  color: var(--forest);
+}
