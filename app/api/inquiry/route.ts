@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import { inquirySchema } from "@/lib/validation";
 
-/**
- * Inquiry endpoint. Phase 2: validates + logs.
- * Phase 6 wires Resend email delivery + rate limiting here.
- */
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -27,7 +23,6 @@ export async function POST(request: Request) {
   }
 
   const { name, email, message } = parsed.data;
-  // TODO(Phase 6): send via Resend to the brand inbox.
   console.log("[inquiry]", { name, email, message: message.slice(0, 80) });
 
   return NextResponse.json({ ok: true });

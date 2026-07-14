@@ -82,7 +82,7 @@ export function InquiryForm() {
 
       {status === "error" && (
         <p role="alert" className="text-sm text-meadow">
-          Something went wrong sending your note. Please email us directly and we&apos;ll fix it.
+          Something went wrong sending your note. Please try again in a moment.
         </p>
       )}
 
